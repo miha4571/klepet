@@ -159,8 +159,13 @@ function dodajSlike(vhodnoBesedilo) {
   
   // izboljsava!!!, ni potrebno da so povezave locene s presledkom
   var besede;
+  var jeLavbic; 
   while ((besede = povezave.exec(vhodnoBesedilo)) != null)
   {
+    jeLavbic = besede[0].indexOf('http://sandbox.lavbic.net/teaching/OIS/gradivo/') > -1;
+    if(jeLavbic) {
+      continue;
+    }
     $('#sporocila').append("<br><img src='"+ besede[0] +"' width='200px' style='margin-left:20px'  /><br>");
   }
   
