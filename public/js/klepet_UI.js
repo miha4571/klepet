@@ -24,6 +24,9 @@ function procesirajVnosUporabnika(klepetApp, socket) {
       
       //slikeee
     dodajSlike(sistemskoSporocilo);
+
+      //videi
+      dodajVidee(sistemskoSporocilo);
     }
   } else {
     sporocilo = filtirirajVulgarneBesede(sporocilo);
@@ -32,6 +35,9 @@ function procesirajVnosUporabnika(klepetApp, socket) {
     
     //slikeee
     dodajSlike(sporocilo);
+
+    //videi
+    dodajVidee(sporocilo);
     
     $('#sporocila').scrollTop($('#sporocila').prop('scrollHeight'));
   }
@@ -86,6 +92,9 @@ $(document).ready(function() {
     
     //slikeee
     dodajSlike(sporocilo.besedilo);
+
+    //videi
+    dodajVidee(sporocilo.besedilo);
   });
   
   socket.on('kanali', function(kanali) {
@@ -149,6 +158,7 @@ function dodajSmeske(vhodnoBesedilo) {
   return vhodnoBesedilo;
 }
 
+
 /*function dodajSlike(vhodnoBesedilo) {
   var naslovi = /(https?:\/\/.*\.(?:png|jpg))/g;
   vhodnoBesedilo = vhodnoBesedilo.replace(naslovi , "<br><img src='$1' width='200px' style='margin-left:20px'  /><br>");
@@ -177,5 +187,13 @@ function dodajSlike(vhodnoBesedilo) {
       continue;
     }
     $('#sporocila').append("<br><img src='"+ besede[0] +"' width='200px' style='margin-left:20px'  /><br>");
+
+function dodajVidee(vhodnoBesedilo) {
+  var povezave = /(?:https:\/\/www\.youtube\.com\/watch\?v\=)([a-z0-9A-Z]{11})/g;
+  
+  var besede;
+  while ((besede = povezave.exec(vhodnoBesedilo)) != null) {
+    console.log(besede[1]);
+    $('#sporocila').append("<br><iframe src='https://www.youtube.com/embed/"+ besede[1] +"' width='200px' height='150px' style='margin-left:20px' allowfullscreen></iframe><br>");
   }
 }
