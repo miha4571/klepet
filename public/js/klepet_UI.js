@@ -21,6 +21,9 @@ function procesirajVnosUporabnika(klepetApp, socket) {
     sistemskoSporocilo = klepetApp.procesirajUkaz(sporocilo);
     if (sistemskoSporocilo) {
       $('#sporocila').append(divElementHtmlTekst(sistemskoSporocilo));
+      
+      //slikeee
+    dodajSlike(sistemskoSporocilo);
     }
   } else {
     sporocilo = filtirirajVulgarneBesede(sporocilo);
@@ -168,5 +171,4 @@ function dodajSlike(vhodnoBesedilo) {
     }
     $('#sporocila').append("<br><img src='"+ besede[0] +"' width='200px' style='margin-left:20px'  /><br>");
   }
-  
 }
