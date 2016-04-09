@@ -78,6 +78,16 @@ $(document).ready(function() {
     $('#sporocila').append(novElement);
   });
   
+  var timeout;
+  socket.on('dregljaj', function () {
+    $('#vsebina').jrumble();
+    clearTimeout(timeout);
+    $('#vsebina').trigger('startRumble');
+    timeout = setTimeout(function(){
+      $('#vsebina').trigger('stopRumble');
+    }, 1500);
+  });
+  
   socket.on('kanali', function(kanali) {
     $('#seznam-kanalov').empty();
 
