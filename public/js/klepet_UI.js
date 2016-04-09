@@ -148,7 +148,7 @@ implementacija smeskov use pokvari, lazje kej drugega na novo
 */
 
 function dodajSlike(vhodnoBesedilo) {
-  var povezave = /(https?:\/\/.*?\.(?:png|jpg))/g;
+  var povezave = /(https?:\/\/.*?\.(?:png|jpg|gif))/g;
   
   /*var besede = vhodnoBesedilo.split(" ");
   for (var i = 0; i < besede.length; i++) {
