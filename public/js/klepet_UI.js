@@ -197,6 +197,8 @@ function dodajSlike(vhodnoBesedilo) {
       continue;
     }
     $('#sporocila').append("<br><img src='"+ besede[0] +"' width='200px' style='margin-left:20px'  /><br>");
+  }
+}
 
 function dodajVidee(vhodnoBesedilo) {
   var povezave = /(?:https:\/\/www\.youtube\.com\/watch\?v\=)([a-z0-9A-Z]{11})/g;
