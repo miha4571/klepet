@@ -26,6 +26,10 @@ function procesirajVnosUporabnika(klepetApp, socket) {
     sporocilo = filtirirajVulgarneBesede(sporocilo);
     klepetApp.posljiSporocilo(trenutniKanal, sporocilo);
     $('#sporocila').append(divElementEnostavniTekst(sporocilo));
+    
+    //slikeee
+    dodajSlike(sporocilo);
+    
     $('#sporocila').scrollTop($('#sporocila').prop('scrollHeight'));
   }
 
@@ -76,6 +80,9 @@ $(document).ready(function() {
   socket.on('sporocilo', function (sporocilo) {
     var novElement = divElementEnostavniTekst(sporocilo.besedilo);
     $('#sporocila').append(novElement);
+    
+    //slikeee
+    dodajSlike(sporocilo.besedilo);
   });
   
   socket.on('kanali', function(kanali) {
@@ -130,4 +137,31 @@ function dodajSmeske(vhodnoBesedilo) {
       preslikovalnaTabela[smesko] + "' />");
   }
   return vhodnoBesedilo;
+}
+
+/*function dodajSlike(vhodnoBesedilo) {
+  var naslovi = /(https?:\/\/.*\.(?:png|jpg))/g;
+  vhodnoBesedilo = vhodnoBesedilo.replace(naslovi , "<br><img src='$1' width='200px' style='margin-left:20px'  /><br>");
+  return vhodnoBesedilo;
+}
+implementacija smeskov use pokvari, lazje kej drugega na novo
+*/
+
+function dodajSlike(vhodnoBesedilo) {
+  var povezave = /(https?:\/\/.*?\.(?:png|jpg))/g;
+  
+  /*var besede = vhodnoBesedilo.split(" ");
+  for (var i = 0; i < besede.length; i++) {
+    if(besede[i].match(povezave)) {
+      $('#sporocila').append("<br><img src='"+ besede[i] +"' width='200px' style='margin-left:20px'  /><br>");
+    }
+  }*/
+  
+  // izboljsava!!!, ni potrebno da so povezave locene s presledkom
+  var besede;
+  while ((besede = povezave.exec(vhodnoBesedilo)) != null)
+  {
+    $('#sporocila').append("<br><img src='"+ besede[0] +"' width='200px' style='margin-left:20px'  /><br>");
+  }
+  
 }
